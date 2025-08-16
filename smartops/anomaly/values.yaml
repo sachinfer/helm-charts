@@ -1,7 +1,7 @@
 # Default values for smartops-anomaly
 image:
   repository: us-docker.pkg.dev/icbt-465109/smartops-repo/smartops-anomaly
-  tag: "0f72817"
+  tag: "e955880"
   pullPolicy: Always
 
 service:
