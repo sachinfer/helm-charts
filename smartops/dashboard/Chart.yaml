@@ -1,0 +1,18 @@
+apiVersion: v2
+name: smartops-dashboard
+description: SmartOps Dashboard - Plotly-Dash based monitoring interface
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+keywords:
+  - smartops
+  - dashboard
+  - monitoring
+  - plotly
+  - dash
+home: https://github.com/sachinfer/SmartOps
+sources:
+  - https://github.com/sachinfer/SmartOps
+maintainers:
+  - name: SmartOps Team
+    email: team@smartops.com
