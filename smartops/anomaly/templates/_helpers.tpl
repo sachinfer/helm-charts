@@ -1,14 +1,14 @@
 ﻿{{/*
 Expand the name of the chart.
 */}}
-{{- define "smartops-dashboard.name" -}}
+{{- define "smartops-anomaly.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Create a default fully qualified app name.
 */}}
-{{- define "smartops-dashboard.fullname" -}}
+{{- define "smartops-anomaly.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -24,16 +24,16 @@ Create a default fully qualified app name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "smartops-dashboard.chart" -}}
+{{- define "smartops-anomaly.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "smartops-dashboard.labels" -}}
-helm.sh/chart: {{ include "smartops-dashboard.chart" . }}
-{{ include "smartops-dashboard.selectorLabels" . }}
+{{- define "smartops-anomaly.labels" -}}
+helm.sh/chart: {{ include "smartops-anomaly.chart" . }}
+{{ include "smartops-anomaly.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -43,17 +43,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "smartops-dashboard.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "smartops-dashboard.name" . }}
+{{- define "smartops-anomaly.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "smartops-anomaly.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "smartops-dashboard.serviceAccountName" -}}
+{{- define "smartops-anomaly.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "smartops-dashboard.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "smartops-anomaly.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
