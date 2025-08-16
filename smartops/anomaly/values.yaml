@@ -1,0 +1,73 @@
+# Default values for smartops-anomaly
+replicaCount: 1
+
+image:
+  repository: us-docker.pkg.dev/sachinfer/smartops-repo/smartops-anomaly
+  tag: latest
+  pullPolicy: Always
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 8000
+  annotations: {}
+
+ingress:
+  enabled: false
+  className: nginx
+  annotations: {}
+  hosts:
+    - host: smartops-anomaly.local
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 200m
+    memory: 256Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+model:
+  enabled: true
+  mountPath: /app/model
+  pvcName: smartops-anomaly-model
+  size: 1Gi
+
+env:
+  - name: ANOMALY_PORT
+    value: "8000"
+  - name: LOG_LEVEL
+    value: "INFO"
+  - name: MODEL_PATH
+    value: "/app/model"
