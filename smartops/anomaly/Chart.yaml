@@ -1,18 +1,17 @@
 apiVersion: v2
 name: smartops-anomaly
-description: SmartOps Anomaly Detection Service - AI-powered anomaly detection
+description: SmartOps Anomaly Detection Service
 type: application
-version: 1.0.0
+version: 0.1.0
 appVersion: "1.0.0"
 keywords:
   - smartops
   - anomaly
-  - ai
-  - machine-learning
   - detection
+  - ai
 home: https://github.com/sachinfer/SmartOps
 sources:
   - https://github.com/sachinfer/SmartOps
 maintainers:
   - name: SmartOps Team
-    email: team@smartops.com
+    email: team@smartops.ai

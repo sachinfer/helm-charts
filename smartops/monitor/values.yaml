@@ -1,67 +1,19 @@
 # Default values for smartops-monitor
-replicaCount: 1
-
 image:
-  repository: us-docker.pkg.dev/sachinfer/smartops-repo/smartops-monitor
-  tag: latest
+  repository: us-docker.pkg.dev/icbt-465109/smartops-repo/smartops-monitor
+  tag: "0f72817"
   pullPolicy: Always
-
-imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
-
-serviceAccount:
-  create: true
-  annotations: {}
-  name: ""
-
-podAnnotations: {}
-
-podSecurityContext: {}
-
-securityContext: {}
 
 service:
   type: ClusterIP
   port: 8000
-  annotations: {}
-
-ingress:
-  enabled: false
-  className: nginx
-  annotations: {}
-  hosts:
-    - host: smartops-monitor.local
-      paths:
-        - path: /
-          pathType: Prefix
-  tls: []
 
 resources:
-  limits:
-    cpu: 200m
-    memory: 256Mi
   requests:
-    cpu: 100m
-    memory: 128Mi
+    memory: "128Mi"
+    cpu: "100m"
+  limits:
+    memory: "256Mi"
+    cpu: "200m"
 
-autoscaling:
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 3
-  targetCPUUtilizationPercentage: 80
-  targetMemoryUtilizationPercentage: 80
-
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}
-
-env:
-  - name: MONITOR_PORT
-    value: "8000"
-  - name: LOG_LEVEL
-    value: "INFO"
-  - name: KUBERNETES_NAMESPACE
-    value: "smartops"
+replicaCount: 1
