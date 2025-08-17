@@ -13,12 +13,12 @@ spec:
       {{- include "smartops-anomaly.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+      labels:
+        {{- include "smartops-anomaly.selectorLabels" . | nindent 8 }}
       {{- with .Values.podAnnotations }}
       annotations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      labels:
-        {{- include "smartops-anomaly.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -37,33 +37,24 @@ spec:
             - name: http
               containerPort: 8000
               protocol: TCP
-          env:
-            {{- toYaml .Values.env | nindent 12 }}
           livenessProbe:
             httpGet:
-              path: /health
+              path: /
               port: http
             initialDelaySeconds: 30
             periodSeconds: 10
           readinessProbe:
             httpGet:
-              path: /ready
+              path: /
               port: http
             initialDelaySeconds: 5
             periodSeconds: 5
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          {{- if .Values.model.enabled }}
-          volumeMounts:
-            - name: model-storage
-              mountPath: {{ .Values.model.mountPath }}
+          {{- with .Values.env }}
+          env:
+            {{- toYaml . | nindent 12 }}
           {{- end }}
-      {{- if .Values.model.enabled }}
-      volumes:
-        - name: model-storage
-          persistentVolumeClaim:
-            claimName: {{ .Values.model.pvcName }}
-      {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
