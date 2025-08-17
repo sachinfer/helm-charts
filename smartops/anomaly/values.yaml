@@ -1,7 +1,7 @@
 # Default values for smartops-anomaly
 image:
   repository: us-docker.pkg.dev/icbt-465109/smartops-repo/smartops-anomaly
-  tag: "d2aae51"
+  tag: "latest"
   pullPolicy: Always
 
 service:
@@ -10,11 +10,11 @@ service:
 
 resources:
   requests:
+    memory: "128Mi"
+    cpu: "50m"
+  limits:
     memory: "256Mi"
     cpu: "200m"
-  limits:
-    memory: "512Mi"
-    cpu: "500m"
 
 model:
   enabled: true
@@ -22,3 +22,40 @@ model:
   pvcName: smartops-anomaly-model
 
 replicaCount: 1
+
+# Autoscaling configuration
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+
+# Pod annotations
+podAnnotations: {}
+
+# Image pull secrets
+imagePullSecrets:
+  - name: gcp-registry-secret
+
+# Service account configuration
+serviceAccount:
+  create: true
+  name: ""
+
+# Pod security context
+podSecurityContext: {}
+
+# Container security context
+securityContext: {}
+
+# Environment variables
+env: []
+
+# Node selector
+nodeSelector: {}
+
+# Affinity
+affinity: {}
+
+# Tolerations
+tolerations: []
