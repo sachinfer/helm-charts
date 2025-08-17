@@ -1,7 +1,7 @@
-# Default values for smartops-anomaly
+﻿# Default values for smartops-anomaly
 image:
-  repository: us-docker.pkg.dev/icbt-465109/smartops-repo/smartops-anomaly
-  tag: "0f217bf"
+  repository: us-docker.pkg.dev/sachinfer/smartops-repo/smartops-anomaly
+  tag: "latest"
   pullPolicy: Always
 
 service:
@@ -10,7 +10,6 @@ service:
 
 resources:
   requests:
-<<<<<<< HEAD
     memory: "8Mi"
     cpu: "5m"
   limits:
@@ -60,17 +59,3 @@ affinity: {}
 
 # Tolerations
 tolerations: []
-=======
-    memory: "256Mi"
-    cpu: "200m"
-  limits:
-    memory: "512Mi"
-    cpu: "500m"
-
-model:
-  enabled: true
-  mountPath: /app/model
-  pvcName: smartops-anomaly-model
-
-replicaCount: 1
->>>>>>> d5968d9ecc2659dc2b13f28fedbfd906d03a371e
