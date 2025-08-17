@@ -5,10 +5,10 @@ metadata:
   labels:
     {{- include "smartops-monitor.labels" . | nindent 4 }}
 spec:
-  type: {{ .Values.service.type }}
+  type: {{ .Values.service.type | default "ClusterIP" }}
   ports:
-    - port: 8000
-      targetPort: 8000
+    - port: {{ .Values.service.port | default 8000 }}
+      targetPort: http
       protocol: TCP
       name: http
   selector:

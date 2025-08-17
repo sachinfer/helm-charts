@@ -5,8 +5,8 @@ metadata:
   labels:
     {{- include "smartops-monitor.labels" . | nindent 4 }}
 spec:
-  {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount }}
+  {{- if (and .Values.autoscaling (not .Values.autoscaling.enabled)) }}
+  replicas: {{ .Values.replicaCount | default 1 }}
   {{- end }}
   selector:
     matchLabels:
@@ -26,13 +26,13 @@ spec:
       {{- end }}
       serviceAccountName: {{ include "smartops-monitor.serviceAccountName" . }}
       securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+        {{- toYaml (.Values.podSecurityContext | default dict) | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+            {{- toYaml (.Values.securityContext | default dict) | nindent 12 }}
+          image: "{{ .Values.image.repository | default "nginx" }}:{{ .Values.image.tag | default "latest" }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy | default "IfNotPresent" }}
           ports:
             - name: http
               containerPort: 8000
@@ -40,7 +40,7 @@ spec:
           # Monitor app is a background script, not a web server
           # No HTTP health checks needed
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            {{- toYaml (.Values.resources | default dict) | nindent 12 }}
           {{- with .Values.env }}
           env:
             {{- toYaml . | nindent 12 }}

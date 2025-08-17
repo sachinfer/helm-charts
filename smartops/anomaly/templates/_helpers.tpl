@@ -52,7 +52,7 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 Create the name of the service account to use
 */}}
 {{- define "smartops-anomaly.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create }}
+{{- if (and .Values.serviceAccount .Values.serviceAccount.create) }}
 {{- default (include "smartops-anomaly.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
