@@ -10,11 +10,11 @@ service:
 
 resources:
   requests:
+    memory: "8Mi"
+    cpu: "5m"
+  limits:
     memory: "16Mi"
     cpu: "10m"
-  limits:
-    memory: "32Mi"
-    cpu: "25m"
 
 replicaCount: 1
 
@@ -22,9 +22,7 @@ replicaCount: 1
 autoscaling:
   enabled: false
   minReplicas: 1
-  maxReplicas: 3
-  targetCPUUtilizationPercentage: 80
-  targetMemoryUtilizationPercentage: 80
+  maxReplicas: 1
 
 # Model configuration
 model:
