@@ -1,15 +1,25 @@
-﻿# Default values for smartops-dashboard
+# Default values for smartops-dashboard
 image:
-  repository: us-docker.pkg.dev/sachinfer/smartops-repo/smartops-dashboard
-  tag: "latest"
+  repository: us-docker.pkg.dev/icbt-465109/smartops-repo/smartops-dashboard
+  tag: "0f217bf"
   pullPolicy: Always
 
 service:
-  type: ClusterIP
+  type: LoadBalancer
   port: 8000
+
+ingress:
+  enabled: true
+  className: nginx
+  hosts:
+    - host: smartops-dashboard.local
+      paths:
+        - path: /
+          pathType: Prefix
 
 resources:
   requests:
+<<<<<<< HEAD
     memory: "8Mi"
     cpu: "5m"
   limits:
@@ -59,3 +69,12 @@ affinity: {}
 
 # Tolerations
 tolerations: []
+=======
+    memory: "256Mi"
+    cpu: "200m"
+  limits:
+    memory: "512Mi"
+    cpu: "500m"
+
+replicaCount: 1
+>>>>>>> d5968d9ecc2659dc2b13f28fedbfd906d03a371e
