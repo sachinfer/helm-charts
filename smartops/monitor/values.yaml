@@ -1,7 +1,7 @@
 # Default values for smartops-monitor
 image:
   repository: us-docker.pkg.dev/icbt-465109/smartops-repo/smartops-monitor
-  tag: "0f72817"
+  tag: "latest"
   pullPolicy: Always
 
 service:
