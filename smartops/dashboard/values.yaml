@@ -1,63 +1,28 @@
-﻿# Default values for smartops-dashboard
+# Default values for smartops-dashboard
 image:
-  repository: us-docker.pkg.dev/sachinfer/smartops-repo/smartops-dashboard
-  tag: "latest"
+  repository: us-docker.pkg.dev/icbt-465109/smartops-repo/smartops-dashboard
+  tag: "0f217bf"
   pullPolicy: Always
 
 service:
-  type: ClusterIP
+  type: LoadBalancer
   port: 8000
+
+ingress:
+  enabled: true
+  className: nginx
+  hosts:
+    - host: smartops-dashboard.local
+      paths:
+        - path: /
+          pathType: Prefix
 
 resources:
   requests:
-    memory: "16Mi"
-    cpu: "10m"
+    memory: "256Mi"
+    cpu: "200m"
   limits:
-    memory: "32Mi"
-    cpu: "25m"
+    memory: "512Mi"
+    cpu: "500m"
 
 replicaCount: 1
-
-# Autoscaling configuration
-autoscaling:
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 3
-  targetCPUUtilizationPercentage: 80
-  targetMemoryUtilizationPercentage: 80
-
-# Model configuration
-model:
-  enabled: false
-  mountPath: "/app/model"
-  pvcName: "dashboard-model-pvc"
-
-# Pod annotations
-podAnnotations: {}
-
-# Image pull secrets
-imagePullSecrets:
-  - name: gcp-registry-secret
-
-# Service account configuration
-serviceAccount:
-  create: true
-  name: ""
-
-# Pod security context
-podSecurityContext: {}
-
-# Container security context
-securityContext: {}
-
-# Environment variables
-env: []
-
-# Node selector
-nodeSelector: {}
-
-# Affinity
-affinity: {}
-
-# Tolerations
-tolerations: []
