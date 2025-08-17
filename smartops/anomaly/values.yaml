@@ -22,3 +22,40 @@ model:
   pvcName: smartops-anomaly-model
 
 replicaCount: 1
+
+# Autoscaling configuration
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+
+# Pod annotations
+podAnnotations: {}
+
+# Image pull secrets
+imagePullSecrets:
+  - name: gcp-registry-secret
+
+# Service account configuration
+serviceAccount:
+  create: true
+  name: ""
+
+# Pod security context
+podSecurityContext: {}
+
+# Container security context
+securityContext: {}
+
+# Environment variables
+env: []
+
+# Node selector
+nodeSelector: {}
+
+# Affinity
+affinity: {}
+
+# Tolerations
+tolerations: []

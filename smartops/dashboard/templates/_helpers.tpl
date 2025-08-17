@@ -54,7 +54,9 @@ Create the name of the service account to use
 {{- define "smartops-dashboard.serviceAccountName" -}}
 {{- if (and .Values.serviceAccount .Values.serviceAccount.create) }}
 {{- default (include "smartops-dashboard.fullname" .) .Values.serviceAccount.name }}
-{{- else }}
+{{- else if .Values.serviceAccount }}
 {{- default "default" .Values.serviceAccount.name }}
+{{- else }}
+{{- "default" }}
 {{- end }}
 {{- end }}
