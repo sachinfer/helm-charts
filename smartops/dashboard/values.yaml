@@ -5,8 +5,8 @@ image:
   pullPolicy: Always
 
 service:
-  type: ClusterIP
-  port: 8000
+  type: LoadBalancer
+  port: 8501
 
 resources:
   requests:
@@ -29,7 +29,8 @@ autoscaling:
 podAnnotations: {}
 
 # Image pull secrets
-imagePullSecrets: []
+imagePullSecrets:
+  - name: gcp-registry-secret
 
 # Service account configuration
 serviceAccount:
