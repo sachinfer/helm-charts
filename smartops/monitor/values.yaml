@@ -26,6 +26,12 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   targetMemoryUtilizationPercentage: 80
 
+# Model configuration
+model:
+  enabled: false
+  mountPath: "/app/model"
+  pvcName: "monitor-model-pvc"
+
 # Pod annotations
 podAnnotations: {}
 
