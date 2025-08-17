@@ -10,11 +10,11 @@ service:
 
 resources:
   requests:
-    memory: "128Mi"
-    cpu: "50m"
+    memory: "32Mi"
+    cpu: "25m"
   limits:
-    memory: "256Mi"
-    cpu: "200m"
+    memory: "64Mi"
+    cpu: "50m"
 
 replicaCount: 1
 
@@ -22,7 +22,7 @@ replicaCount: 1
 autoscaling:
   enabled: false
   minReplicas: 1
-  maxReplicas: 100
+  maxReplicas: 1
   targetCPUUtilizationPercentage: 80
 
 # Pod annotations
