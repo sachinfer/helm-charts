@@ -1,4 +1,4 @@
-# Default values for smartops-monitor
+﻿# Default values for smartops-monitor
 image:
   repository: us-docker.pkg.dev/sachinfer/smartops-repo/smartops-monitor
   tag: "latest"
@@ -18,6 +18,7 @@ resources:
 
 replicaCount: 1
 
+# Autoscaling configuration
 autoscaling:
   enabled: false
   minReplicas: 1
@@ -25,8 +26,31 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   targetMemoryUtilizationPercentage: 80
 
+# Pod annotations
+podAnnotations: {}
+
+# Image pull secrets
+imagePullSecrets: []
+
+# Service account configuration
+serviceAccount:
+  create: true
+  name: ""
+
+# Pod security context
+podSecurityContext: {}
+
+# Container security context
+securityContext: {}
+
+# Environment variables
+env: []
+
+# Node selector
 nodeSelector: {}
 
-tolerations: []
-
+# Affinity
 affinity: {}
+
+# Tolerations
+tolerations: []
