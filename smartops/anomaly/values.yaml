@@ -36,7 +36,8 @@ model:
 podAnnotations: {}
 
 # Image pull secrets
-imagePullSecrets: []
+imagePullSecrets:
+  - name: gcp-registry-secret
 
 # Service account configuration
 serviceAccount:
