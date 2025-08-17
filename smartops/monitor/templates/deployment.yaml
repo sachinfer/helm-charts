@@ -33,7 +33,10 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          # Monitor app is a background script, no ports needed
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
           # Monitor app is a background script, not a web server
           # No HTTP health checks needed
           resources:

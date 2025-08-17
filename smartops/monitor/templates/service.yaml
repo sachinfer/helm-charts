@@ -6,6 +6,10 @@ metadata:
     {{- include "smartops-monitor.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
-  # Monitor app is a background script, no ports needed
+  ports:
+    - port: 8000
+      targetPort: 8000
+      protocol: TCP
+      name: http
   selector:
     {{- include "smartops-monitor.selectorLabels" . | nindent 4 }}
