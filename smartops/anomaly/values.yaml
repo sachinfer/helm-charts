@@ -1,6 +1,6 @@
-﻿# Default values for smartops-anomaly
+# Default values for smartops-anomaly
 image:
-  repository: us-docker.pkg.dev/sachinfer/smartops-repo/smartops-anomaly
+  repository: us-docker.pkg.dev/icbt-465109/smartops-repo/smartops-anomaly
   tag: "latest"
   pullPolicy: Always
 
